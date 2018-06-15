@@ -1,0 +1,40 @@
+.content {
+    /*max-width: 1200px;*/
+}
+
+.sidebar > h1 {
+    --size: 60px;
+
+    text-align: left;
+    line-height: var(--size);
+    height: var(--size);
+    padding-left: 15px;
+}
+
+.sidebar > h1 > a:before {
+    content: ' ';
+    display: inline-block;
+    height: var(--size);
+    width: var(--size);
+    background-image: url('pencil.png');
+    background-size: contain;
+    margin-right: 15px;
+}
+
+.sidebar > h1 a {
+    vertical-align: top;
+}
+
+.sidebar-nav li {
+    margin: 0 25px;
+    line-height: 1.8em;
+}
+
+.sidebar-nav > ul > li > ul p {
+    font-weight: normal;
+}
+
+.markdown-section em {
+    color: inherit;
+    font-weight: 600;
+}
