@@ -1,56 +1,53 @@
-# Vue Trello Clone
+<div style="text-align: center; margin-bottom:2em;"><img src="docs/assets/logo.png" height="400"></div>
 
-A simple Trello clone in Vue, Vuex and Bulma
+Diary of a Rapid Application Build is the journey of an experienced, so-called "senior" developer, building out a full-featured [Trello](http://trello.com) clone – but replacing a more planned, architectural approach with rapid application development techniques.
 
-![screenshot](docs/screenshot.png)
+The aim of the project is to document the shift of mindset required to build applications at speed; what techniques worked, when they worked, what accepted practices got in the way, which assumptions were wrong, and ultimately what got the job done:
 
-
-## Features
-
-Trello features
-
-- Single board
-- Re-orderable lists and tasks
-
-Task functionality
-
-- Title, description, date
-- Quick entry and full entry modal
-- Icons and colors to indicate due and overdue items
-- Editable tasks
-
-UI features
-
-- Fast keyboard interaction
-- Smooth animation
-
-State management
-
-- Vuex state management
-- Persistence
+![screenshot](docs/assets/screenshot.png)
 
 
-## Setup
+
+
+## Project structure
+
+
+The project consists of two parts:
+
+1. application / source code
+2. development diary
+
+Both are part of the repo, and can be checked out in phases via [tags](releases).
+
+The **diary** can be read here:
+
+- https://davestewart.github.io/app-diary
+
+The **application** is online here:
+
+- https://focused-goldstine-31444f.netlify.com/
+
+The **roadmap** can be viewed here:
+
+- [ROADMAP.md](ROADMAP.md)
+
+
+## Quick start
+
+Clone the project, then install and run:
 
 ``` bash
-# install dependencies
 npm install
-
-# serve with hot reload at localhost:8080
 npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run unit tests
-npm run unit
-npm run unit:watch
-
-# run all tests
-npm test
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+Open the browser to http://localhost:8080 to view the landing page. Add lists and tasks by typing.
+
+To quickly add the layout above, copy, paste and run the following in the browser's console:
+
+```js
+function days (num) { return new Date(Date.now() + (1000 * 60 * 60 * 24 * num)) }
+store.dispatch('setLists', [ { title:'To do', items:[ { title:'Washing up', date:days(-5) }, { title:'Buy new suit', description:'Need to get this in time for the wedding!', date:days(2) }, { title:'Go to wedding', description:'', date:days(10) }, { title:'Go shopping' }, { title:'Post on Twitter about Trello clone' } ] }, { title:'Doing', items:[ { title:'Take Trello screenshot' }, { title:'Publish Trello readme' } ] }, { title:'Done', items:[ { title:'Build Trello clone', description:'Use Vue, Vuex, Vue Smooth Dnd and Bulma' } ] } ])
+```
+
+

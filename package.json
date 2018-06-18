@@ -1,8 +1,10 @@
 {
   "name": "app-diary",
-  "version": "1.0.0",
-  "description": "A senior developer's journey into rapid application prototyping",
+  "version": "0.1.0",
+  "description": "Ongoing development diary of building a Trello clone",
   "author": "Dave Stewart <dave@davestewart.co.uk>",
+  "repository": "https://github.com/davestewart/diary-of-a-web-app",
+  "license": "MIT",
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
@@ -11,6 +13,7 @@
     "test": "npm run unit",
     "lint": "eslint --ext .js,.vue src test/unit",
     "build": "node build/build.js",
+    "build:report": "npm run build --report",
     "docs": "docsify serve ./docs"
   },
   "main": "src/app/main.js",

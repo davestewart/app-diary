@@ -2,19 +2,19 @@
 
 ## Intro
 
-> A senior developer's journey into rapid application prototyping
+> A senior developer's journey into rapid application development
 
 As an experienced developer of 15+ years, I'm used to building large, complex sites, with scalable architecture, clean code and best practices. Imagine how surprised I was when all this experience fell flat when [tasked](intro/background) with a 4-hour coding challenge to build a basic [Trello](https://trello.com) clone:
 
 ![screenshot](https://github.com/davestewart/vue-trello-clone/raw/master/docs/screenshot.png)
 
-It turns out that the architectural skills I've spent years building up simply just got in the way when it came to throwing something together, and I learned the hard way that to complete the challenge I needed to switch my mindset from army commander to street fighter.
+It turns out that the architectural skills I've spent years building up simply just got in the way when it came to building something fast, and I learned the hard way that to complete the challenge I needed to switch my mindset from army general to street fighter.
 
 In hindsight, the time constraint was ridiculous, but what it took with one hand it gave with the other; ultimately the frugality required to meet the deadline resulted in decisive, unfussy work, and a significant boost in productivity.
 
 Yes, corners had to be cut, and yes, I had to do things I felt uncomfortable with, but I discovered a focused, cyclical way of working, alternating from getting it done and then and *only then* getting it right, which I want to explore further.
 
-For more information on the test see the [background](intro/background.md) page.
+For more information see the [background](intro/background.md) page.
 
 
 ## Project
@@ -25,7 +25,7 @@ I'll build new features in short, estimated sprints, and will diarise my thought
 
 On completing a sprint I'll make sure to refactor if necessary, mitigating technical debt and providing a solid foundation for the next feature.
 
-For more information on questions see the [questions](intro/questions.md) page.
+For more information see the [questions](intro/questions.md) page.
 
 ## Goal
 
@@ -36,7 +36,7 @@ I'm making the project public as I think it's an interesting process, and it's a
 
 ## Updates
 
-If you're interested to get project updates, the best way to would be to [watch](https://github.com/davestewart/web-app-diary/subscription) the repository.
+If you're interested to get project updates, the best way to would be to [watch](https://github.com/davestewart/app-diary/subscription) the repository.
 
 I'll also announce progress on my Twitter feed, which is [@dave_stewart](https://twitter.com/dave_stewart).
 

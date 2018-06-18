@@ -2,6 +2,8 @@
 
 > What do I want to accomplish with this project?
 
+The initial prototype and its severe time constraint sparked both observations and questions, making me analyse my existing development process. As I became used to the process, I decided to start logging my thoughts and questions so I could apply them to subsequent phases.
+
 #### Timings
 
 - How long do tasks actually take?

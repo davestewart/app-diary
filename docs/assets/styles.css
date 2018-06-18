@@ -1,40 +1,46 @@
-.content {
-    /*max-width: 1200px;*/
+.content article {
+  /*max-width: 1200px;*/
+  margin-bottom: 15vh;
 }
+
+/* logo */
 
 .sidebar > h1 {
-    --size: 60px;
-
-    text-align: left;
-    line-height: var(--size);
-    height: var(--size);
-    padding-left: 15px;
+  text-align: left;
+  padding-left: 15px;
 }
 
-.sidebar > h1 > a:before {
-    content: ' ';
-    display: inline-block;
-    height: var(--size);
-    width: var(--size);
-    background-image: url('pencil.png');
-    background-size: contain;
-    margin-right: 15px;
+.sidebar > h1 > a img {
+  height: 60px;
 }
 
-.sidebar > h1 a {
-    vertical-align: top;
+.sidebar > h1 > a {
+  display: flex;
+  vertical-align: top;
+  line-height: 0.9em;
 }
+
+.sidebar > h1 div {
+  padding: 6px 12px;
+}
+
+.sidebar > h1 span {
+  font-size: 0.6em;
+  display: block;
+}
+
+/* sidebar */
 
 .sidebar-nav li {
-    margin: 0 25px;
-    line-height: 1.8em;
+  margin: 0 25px;
+  line-height: 1.8em;
 }
 
 .sidebar-nav > ul > li > ul p {
-    font-weight: normal;
+  font-weight: normal;
 }
 
 .markdown-section em {
-    color: inherit;
-    font-weight: 600;
+  color: inherit;
+  font-weight: 600;
 }
