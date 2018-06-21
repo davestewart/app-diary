@@ -10,11 +10,11 @@ The brief was to build only [basic](intro/brief.md) functionality in around 4 ho
 
 What became clear during the process was just how **long** things take, and with such a tight timescale just how little room for error, or scope for polish there was:
 
-- flexible project configuration was a costly mistake
-- best practices and scalable architecture just got in the way
+- flexible [project configuration](/diary/v0.1.0.md) was a costly mistake
+- best practices and [scalable architecture](/diary/v0.1.0.md) just got in the way
 - code had to be scavenged just to get up and running
-- polish and pop had to fight tooth and nail for their place
-- ideas to "add value" or "over-deliver" looked foolish in context
+- [polish and pop](/diary/v0.3.0.md) had to fight tooth and nail for their place
+- ideas to add value or "[over-deliver](/diary/v0.0.0.md)" looked foolish in context
 
 Whilst I was proud of the eventual result and enjoyed the process to get there, what I found *most* interesting was my emotional reaction to having to ditch skills that have taken years to build up, and supposedly cement my position as a "senior" developer.
 

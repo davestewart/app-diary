@@ -1,3 +1,6 @@
+body {
+}
+
 .content article {
   /*max-width: 1200px;*/
   margin-bottom: 15vh;
@@ -43,4 +46,23 @@
 .markdown-section em {
   color: inherit;
   font-weight: 600;
+}
+
+
+/* content */
+
+.markdown-section h2 {
+  border-bottom: 1px solid #DDD;
+  margin-left: -0.8em;
+  padding-left: 0.8em;
+  padding-bottom: 0.4em;
+}
+
+.markdown-section h2 + h3 {
+  margin-top: 0.8em;
+}
+
+pre code.lang-folders {
+  line-height: 1.4em;
+  padding: ;
 }
