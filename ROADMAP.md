@@ -46,9 +46,9 @@ State management
 
 ### Backlog
 
-Board types (kanban, to do)
-Search (home and board)
-Multiple task select + action
-Card attributes / plugin architecture
+- Board types (kanban, to do)
+- Search (home and board)
+- Multiple task select + action
+- Card attributes / plugin architecture
 
 
