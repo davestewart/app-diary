@@ -6,7 +6,7 @@
 
 As an experienced developer of 15+ years, I'm used to building large, complex sites, with scalable architecture, clean code and best practices. Imagine how surprised I was when all this experience fell flat when [tasked](intro/background) with a 4-hour coding challenge to build a basic [Trello](https://trello.com) clone:
 
-![screenshot](https://github.com/davestewart/vue-trello-clone/raw/master/docs/screenshot.png)
+[![screenshot](https://github.com/davestewart/vue-trello-clone/raw/master/docs/screenshot.png)](http://trello.davestewart.io)
 
 It turns out that the architectural skills I've spent years building up simply just got in the way when it came to building something fast, and I learned the hard way that to complete the challenge I needed to switch my mindset from army general to street fighter.
 

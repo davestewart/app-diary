@@ -43,12 +43,6 @@ body {
   font-weight: normal;
 }
 
-.markdown-section em {
-  color: inherit;
-  font-weight: 600;
-}
-
-
 /* content */
 
 .markdown-section h2 {
@@ -62,7 +56,15 @@ body {
   margin-top: 0.8em;
 }
 
+.markdown-section em {
+  color: inherit;
+  font-weight: 600;
+}
+
+.markdown-section li {
+  margin-left: 1em;
+}
+
 pre code.lang-folders {
   line-height: 1.4em;
-  padding: ;
 }
