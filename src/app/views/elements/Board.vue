@@ -141,18 +141,18 @@ export default {
     onListDrop: makeDropHandler('onListDropComplete'),
 
     onListDropComplete: function (src, trg) {
-      this.$store.commit('moveList', [src.index, trg.index])
+      this.$store.commit('moveList', { fromIndex: src.index, toIndex: trg.index })
     },
 
     onCardDrop: makeDropHandler('onCardDropComplete'),
 
     onCardDropComplete (src, trg, element, payload) {
-      this.$store.commit('moveItem', [
-        src.params[1],
-        src.index,
-        trg.params[1],
-        trg.index,
-      ])
+      this.$store.commit('moveItem', {
+        fromList: src.params[1],
+        fromIndex: src.index,
+        toList: trg.params[1],
+        toIndex: trg.index,
+      })
     },
 
     showModal (item) {
