@@ -158,7 +158,7 @@ export default {
     showModal (item) {
       this.modal = true
       this.$nextTick(() => {
-        this.$refs.form.show(item)
+        this.$refs.form.fill(item)
       })
     },
 

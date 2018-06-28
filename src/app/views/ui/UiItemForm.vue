@@ -54,9 +54,9 @@ export default {
   },
 
   methods: {
-    show (data) {
+    fill (data) {
       Object.assign(this, data)
-      this.$el.querySelector('input').focus()
+      this.$el.querySelector('[name="description"]').focus()
     },
 
     validate () {
