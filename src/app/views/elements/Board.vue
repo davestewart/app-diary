@@ -3,7 +3,8 @@
     <div class="board">
 
       <div class="clear-button">
-        <ui-button :disabled="lists.length === 0" @click="reset">Reset</ui-button>
+        <ui-button type="primary" v-show="lists.length === 0" @click="demo">Demo</ui-button>
+        <ui-button v-show="lists.length !== 0" @click="reset">Reset</ui-button>
       </div>
 
       <div class="lists-container">
@@ -77,6 +78,7 @@ import Card from './Card'
 import UiItemForm from '../ui/UiItemForm'
 import UiItemEntry from '../ui/UiItemEntry'
 import { makeDropHandler } from '../../../core/utils/plugins'
+import { makeData } from '../../state/demo'
 
 export default {
   components: {
@@ -176,6 +178,10 @@ export default {
       if (confirm('Are you sure you want to reset the board?')) {
         this.$store.commit('reset')
       }
+    },
+
+    demo () {
+      this.$store.dispatch('setLists', makeData())
     },
   }
 }
