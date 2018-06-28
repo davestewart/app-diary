@@ -76,7 +76,7 @@ import { Container, Draggable } from 'vue-smooth-dnd'
 import Card from './Card'
 import UiItemForm from '../ui/UiItemForm'
 import UiItemEntry from '../ui/UiItemEntry'
-import { makeDropHandler } from '../../utils/plugins'
+import { makeDropHandler } from '../../../core/utils/plugins'
 
 export default {
   components: {
