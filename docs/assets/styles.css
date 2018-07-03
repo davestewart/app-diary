@@ -77,6 +77,10 @@ body {
   margin-left: 1em;
 }
 
+.markdown-section th {
+  text-align: left;
+}
+
 pre code.lang-folders {
   line-height: 1.4em;
 }
