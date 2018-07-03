@@ -17,7 +17,7 @@ export function getList (lists, listRef) {
  * Get item and optionally list by item id or reference
  *
  * @param   {Array}         lists           The array of lists
- * @param   {string}        itemRef         The id of or reference to the item to find
+ * @param   {string|object} itemRef         The id of or reference to the item to find
  * @param   {boolean}      [returnList]     An optional flg to return both list and item
  * @returns {object|{list, item}}           The found item or an object containing the parent list and found item
  */

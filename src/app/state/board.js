@@ -43,7 +43,7 @@ export const mutations = {
   updateList (state, { listId, title }) {
     const list = getList(state.lists, listId)
     if (list) {
-      Object.assign(list, makeList(title))
+      list.title = title
       state.lists.splice(state.lists.indexOf(list), 1, list)
     }
   },

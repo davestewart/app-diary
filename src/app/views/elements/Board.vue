@@ -20,7 +20,11 @@
 
               <div class="list-header">
                 <span class="list-drag-handle">&#x2630;</span>
-                {{ list.title }}
+                <ui-inline-edit class="list-title"
+                                :text="list.title"
+                                @submit="value => onEditList(list.id, value)"
+                                @cancel="value => focusInput(list.id)"
+                />
               </div>
 
               <Container
@@ -38,10 +42,10 @@
               </Container>
 
               <div class="item-entry">
-                <ui-item-entry :list-id="list.id"
-                               placeholder="Add an item"
-                               icon="ellipsis-h"
-                               @enter="onAddItem"/>
+                <ui-item-edit :list-id="list.id"
+                              placeholder="Add an item"
+                              icon="ellipsis-h"
+                              @submit="onAddItem"/>
               </div>
 
             </section>
@@ -51,7 +55,7 @@
         </Container>
 
         <div class="new-list">
-          <ui-item-entry placeholder="Add a list" @enter="onAddList"/>
+          <ui-item-edit placeholder="Add a list" @submit="onAddList"/>
         </div>
       </div>
 
@@ -76,7 +80,8 @@ import { Container, Draggable } from 'vue-smooth-dnd'
 
 import Card from './Card'
 import UiItemForm from '../ui/UiItemForm'
-import UiItemEntry from '../ui/UiItemEntry'
+import UiInlineEdit from '../ui/UiInlineEdit'
+import UiItemEdit from '../ui/UiItemEdit'
 import { makeDropHandler } from '../../../core/utils/plugins'
 import { makeData } from '../../state/demo'
 
@@ -84,7 +89,8 @@ export default {
   components: {
     Container,
     Draggable,
-    UiItemEntry,
+    UiInlineEdit,
+    UiItemEdit,
     UiItemForm,
     Card,
   },
@@ -106,11 +112,14 @@ export default {
     onAddList ({ text }) {
       this.$store.commit('addList', { title: text })
       this.$nextTick(() => {
-        const lists = this.$refs.list
-        lists[lists.length - 1]
-          .querySelector('input')
-          .focus()
+        const lists = this.$store.state.board.lists
+        this.focusInput(lists[lists.length - 1].id)
       })
+    },
+
+    onEditList (listId, title) {
+      this.$store.commit('updateList', { listId, title })
+      this.focusInput(listId)
     },
 
     onAddItem ({ id, text, more }) {
@@ -219,7 +228,20 @@ export default {
   }
 
   .list-header {
+    display: flex;
     margin-bottom: 5px;
+    margin-right: 5px;
+    font-size: 18px;
+  }
+
+  .list-drag-handle {
+    cursor: move;
+    padding: 2px 5px;
+  }
+
+  .list-title {
+    flex-grow: 1;
+    margin-left: -2px;
   }
 
   .card {
@@ -237,15 +259,6 @@ export default {
 
   .card-ghost-drop {
     transform: scale(1);
-  }
-
-  .list-header {
-    font-size: 18px;
-  }
-
-  .list-drag-handle {
-    cursor: move;
-    padding: 5px;
   }
 
   .item-entry {
