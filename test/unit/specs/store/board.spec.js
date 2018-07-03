@@ -64,7 +64,12 @@ describe('board mutations', () => {
 
   test('moveItem should move an item to another list', () => {
     const payload = copy(state.lists[0].items[0])
-    moveItem(state, [0, 0, 1, 0])
+    moveItem(state, {
+      fromList: 0,
+      toList: 1,
+      fromIndex: 0,
+      toIndex: 0,
+    })
     expect(state.lists[1].items[0]).toEqual(payload)
   })
 })

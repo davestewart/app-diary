@@ -28,8 +28,8 @@ export function makeDropHandler (onComplete, onDrop) {
    *
    * Handles the DnD @drop event:
    *
-   * When both remove and added event have been received, the
-   * pass onComplete handler is called, passing the following properties:
+   * When both remove and added event have been received, the passed
+   * onComplete handler is called, passing the following properties:
    *
    *  - @param  {DragData}      src         Information about the drag source
    *  - @param  {DragData}      trg         Information about the drop target

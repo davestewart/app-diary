@@ -5,7 +5,7 @@
       <input class="input" v-model.trim="input" :placeholder="placeholder" @keydown.enter="onEnter"/>
     </div>
     <div class="control" v-if="icon">
-      <button type="submit" class="button is-primary" @click="onClick" :disabled="input.length === 0">
+      <button type="submit" class="button is-primary" @click="onClick" :disabled="input.length === 0" tabindex="-1">
         <span class="icon is-small">
           <i :class="`fas fa-${icon}`"></i>
         </span>
@@ -38,16 +38,16 @@ export default {
 
   methods: {
     onEnter ($event) {
-      this.emit($event.metaKey || $event.ctrlKey)
+      this.onSave($event.metaKey || $event.ctrlKey)
     },
 
     onClick () {
-      this.emit(true)
+      this.onSave(true)
     },
 
-    emit (more) {
+    onSave (more) {
       if (this.input) {
-        this.$emit('enter', {
+        this.$emit('submit', {
           id: this.listId,
           text: this.input,
           more

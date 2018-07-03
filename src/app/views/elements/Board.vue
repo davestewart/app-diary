@@ -3,7 +3,8 @@
     <div class="board">
 
       <div class="clear-button">
-        <ui-button :disabled="lists.length === 0" @click="reset">Reset</ui-button>
+        <ui-button type="primary" v-show="lists.length === 0" @click="demo">Demo</ui-button>
+        <ui-button v-show="lists.length !== 0" @click="reset">Reset</ui-button>
       </div>
 
       <div class="lists-container">
@@ -17,10 +18,10 @@
           <Draggable v-for="(list, listIndex) in lists" :key="list.id">
             <section class="list-container" ref="list" :data-id="list.id">
 
-              <div class="list-header">
-                <span class="list-drag-handle">&#x2630;</span>
-                {{ list.title }}
-              </div>
+              <list-header :title="list.title"
+                           @submit="value => onEditList(list.id, value)"
+                           @remove="removeList(list.id)"
+              />
 
               <Container
                 group-name="list"
@@ -31,16 +32,19 @@
                 @drop="e => onCardDrop(e, list, listIndex)"
               >
                 <Draggable v-for="item in list.items" :key="item.id">
-                  <Card :item="item" @edit="editItem"/>
+                  <Card :item="item"
+                        @edit="editItem"
+                        @remove="removeItem"
+                  />
                 </Draggable>
 
               </Container>
 
               <div class="item-entry">
-                <ui-item-entry :list-id="list.id"
-                               placeholder="Add an item"
-                               icon="ellipsis-h"
-                               @enter="onAddItem"/>
+                <ui-item-edit :list-id="list.id"
+                              placeholder="Add an item"
+                              icon="ellipsis-h"
+                              @submit="onAddItem"/>
               </div>
 
             </section>
@@ -50,7 +54,7 @@
         </Container>
 
         <div class="new-list">
-          <ui-item-entry placeholder="Add a list" @enter="onAddList"/>
+          <ui-item-edit placeholder="Add a list" @submit="onAddList"/>
         </div>
       </div>
 
@@ -74,17 +78,20 @@
 import { Container, Draggable } from 'vue-smooth-dnd'
 
 import Card from './Card'
+import ListHeader from './ListHeader'
 import UiItemForm from '../ui/UiItemForm'
-import UiItemEntry from '../ui/UiItemEntry'
-import { makeDropHandler } from '../../utils/plugins'
+import UiItemEdit from '../ui/UiItemEdit'
+import { makeDropHandler } from '../../../core/utils/plugins'
+import { makeData } from '../../state/demo'
 
 export default {
   components: {
     Container,
     Draggable,
-    UiItemEntry,
-    UiItemForm,
+    ListHeader,
     Card,
+    UiItemEdit,
+    UiItemForm,
   },
 
   data: function () {
@@ -104,11 +111,18 @@ export default {
     onAddList ({ text }) {
       this.$store.commit('addList', { title: text })
       this.$nextTick(() => {
-        const lists = this.$refs.list
-        lists[lists.length - 1]
-          .querySelector('input')
-          .focus()
+        const lists = this.$store.state.board.lists
+        this.focusInput(lists[lists.length - 1].id)
       })
+    },
+
+    onEditList (listId, title) {
+      this.$store.commit('updateList', { listId, title })
+      this.focusInput(listId)
+    },
+
+    removeList (listId) {
+      this.$store.commit('removeList', listId)
     },
 
     onAddItem ({ id, text, more }) {
@@ -136,27 +150,31 @@ export default {
       this.showModal(item)
     },
 
+    removeItem (item) {
+      this.$store.commit('removeItem', item.id)
+    },
+
     onListDrop: makeDropHandler('onListDropComplete'),
 
     onListDropComplete: function (src, trg) {
-      this.$store.commit('moveList', [src.index, trg.index])
+      this.$store.commit('moveList', { fromIndex: src.index, toIndex: trg.index })
     },
 
     onCardDrop: makeDropHandler('onCardDropComplete'),
 
     onCardDropComplete (src, trg, element, payload) {
-      this.$store.commit('moveItem', [
-        src.params[1],
-        src.index,
-        trg.params[1],
-        trg.index,
-      ])
+      this.$store.commit('moveItem', {
+        fromList: src.params[1],
+        fromIndex: src.index,
+        toList: trg.params[1],
+        toIndex: trg.index,
+      })
     },
 
     showModal (item) {
       this.modal = true
       this.$nextTick(() => {
-        this.$refs.form.show(item)
+        this.$refs.form.fill(item)
       })
     },
 
@@ -176,6 +194,10 @@ export default {
       if (confirm('Are you sure you want to reset the board?')) {
         this.$store.commit('reset')
       }
+    },
+
+    demo () {
+      this.$store.dispatch('setLists', makeData())
     },
   }
 }
@@ -212,10 +234,6 @@ export default {
     }
   }
 
-  .list-header {
-    margin-bottom: 5px;
-  }
-
   .card {
     margin: 5px;
     background-color: white;
@@ -231,15 +249,6 @@ export default {
 
   .card-ghost-drop {
     transform: scale(1);
-  }
-
-  .list-header {
-    font-size: 18px;
-  }
-
-  .list-drag-handle {
-    cursor: move;
-    padding: 5px;
   }
 
   .item-entry {

@@ -2,7 +2,7 @@
 
   <div class="query-form card">
     <div class="card-content">
-      <h2 class="title">New task</h2>
+      <h2 class="title">{{ id ? 'Edit' : 'New' }} task</h2>
       <ui-input name="title"
                 label="Title"
                 v-model="title"
@@ -54,9 +54,9 @@ export default {
   },
 
   methods: {
-    show (data) {
-      Object.assign(this, data)
-      this.$el.querySelector('input').focus()
+    fill (values) {
+      Object.assign(this, data(), values)
+      this.$el.querySelector('[name="description"]').focus()
     },
 
     validate () {

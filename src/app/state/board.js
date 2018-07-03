@@ -1,5 +1,5 @@
 import { makeItem, makeList } from 'app/utils/data'
-import { getItemById, getListById, getListByItemId } from 'app/utils/board'
+import { getItem, getList } from 'app/utils/board'
 
 export function state () {
   return {
@@ -8,24 +8,30 @@ export function state () {
 }
 
 const getters = {
-  getListById: state => listId => {
-    return getListById(state.lists, listId)
+  getList: state => listRef => {
+    return getList(state.lists, listRef)
   },
 
-  getListByItemId: state => itemId => {
-    return getListByItemId(state.lists, itemId)
+  getItem: state => (itemRef, returnList) => {
+    return getItem(state.lists, itemRef, returnList)
   },
+}
 
-  getItemById: state => itemId => {
-    return getItemById(state.lists, itemId)
+export const actions = {
+  setLists ({ state, commit }, lists) {
+    commit('reset')
+    lists.forEach((list, index) => {
+      commit('addList', { title: list.title })
+      if (list.items) {
+        list.items.forEach(item => {
+          commit('addItem', Object.assign({ listId: index }, item))
+        })
+      }
+    })
   }
 }
 
 export const mutations = {
-  lists (state, value) {
-    state.lists = value
-  },
-
   reset (state) {
     state.lists = []
   },
@@ -34,45 +40,55 @@ export const mutations = {
     state.lists.push(makeList(title))
   },
 
-  moveList (state, [fromIndex, toIndex]) {
-    state.lists.splice(toIndex, 0, state.lists.splice(fromIndex, 1)[0])
+  updateList (state, { listId, title }) {
+    const list = getList(state.lists, listId)
+    if (list) {
+      list.title = title
+      state.lists.splice(state.lists.indexOf(list), 1, list)
+    }
   },
 
-  removeList (state, { listId }) {
-    const index = state.lists.findIndex(list => list.id === listId)
-    state.lists.splice(index, 1)
+  moveList (state, { fromIndex, toIndex }) {
+    state.lists.splice(toIndex, 0, ...state.lists.splice(fromIndex, 1))
+  },
+
+  removeList (state, listId) {
+    const list = getList(state.lists, listId)
+    if (list) {
+      const index = state.lists.indexOf(list)
+      state.lists.splice(index, 1)
+    }
   },
 
   addItem (state, { listId, title, description, date }) {
-    const list = getListById(state.lists, listId)
+    const list = getList(state.lists, listId)
     list.items.push(makeItem(title, description, date))
   },
 
   updateItem (state, { itemId, title, description, date }) {
-    const item = getItemById(state.lists, itemId)
+    const item = getItem(state.lists, itemId)
     if (item) {
       Object.assign(item, makeItem(title, description, date, itemId))
     }
   },
 
-  moveItem (state, [fromListRef, fromIndex, toListRef, toIndex]) {
-    const fromList = typeof fromListRef === 'number'
-      ? state.lists[fromListRef].items
-      : getListById(state.lists, fromListRef)
-    const toList = typeof toListRef === 'number'
-      ? state.lists[toListRef].items
-      : getListById(state.lists, toListRef)
-    toList.splice(toIndex, 0, fromList.splice(fromIndex, 1)[0])
+  moveItem (state, { fromList, toList, fromIndex, toIndex }) {
+    fromList = getList(state.lists, fromList)
+    toList = getList(state.lists, toList)
+    toList.items.splice(toIndex, 0, ...fromList.items.splice(fromIndex, 1))
   },
 
-  removeItem (state, { itemId }) {
-    const list = getListByItemId(state.lists, itemId)
-    list.items.splice(list.items.findIndex(item => item.id === itemId), 1)
+  removeItem (state, itemId) {
+    const { list, item } = getItem(state.lists, itemId, true)
+    if (list) {
+      list.items.splice(list.items.indexOf(item), 1)
+    }
   }
 }
 
 export default {
   state,
-  mutations,
   getters,
+  actions,
+  mutations,
 }
