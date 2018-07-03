@@ -19,6 +19,7 @@
   "main": "src/app/main.js",
   "dependencies": {
     "bulma": "^0.7.1",
+    "date-fns": "^1.29.0",
     "lodash": "^4.17.10",
     "uuid": "^3.2.1",
     "vee-validate": "^2.1.0-beta.1",

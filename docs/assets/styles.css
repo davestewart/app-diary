@@ -39,11 +39,23 @@ body {
   line-height: 1.8em;
 }
 
+.sidebar-nav > ul > li > p,
+.sidebar-nav > ul > li > p > a {
+  font-weight: bold;
+  font-size: 16px;
+  margin-top: 1em;
+  margin-bottom: .5em;
+}
+
 .sidebar-nav > ul > li > ul p {
   font-weight: normal;
 }
 
 /* content */
+
+.markdown-section {
+  max-width: 850px;
+}
 
 .markdown-section h2 {
   border-bottom: 1px solid #DDD;

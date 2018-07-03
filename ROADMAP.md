@@ -6,6 +6,7 @@ Trello features
 
 - Single board
 - Re-orderable lists and tasks
+- Deleteable lists and tasks
 
 Task functionality
 
@@ -26,12 +27,6 @@ State management
 
 ## Planned features
 
-### 1.0.0
-
-- Edit lists
-- Remove lists and tasks
-
-
 ### 1.1.0
 
 - Multiple boards
@@ -46,9 +41,19 @@ State management
 
 ### Backlog
 
-- Board types (kanban, to do)
 - Search (home and board)
-- Multiple task select + action
-- Card attributes / plugin architecture
+- Multiple task select
+    - either by marquee or keyboard modifier
+    - then potentially drag
+    - if not, an action
+- Undo / redo
+- Keyboard navigation between cards, including
+    - up, down
+    - left, right
+    - edit, complete, delete
+- Types
+    - Board types, i.e. Kanban, To do
+    - List types, i.e. "done" column
+- Feature plugin architecture
 
 

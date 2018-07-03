@@ -19,7 +19,7 @@ For more information see the [background](intro/background.md) page.
 
 ## Project
 
-This project aims to document the learning from the initial challenge, then continue the process to build out the finished product, using the same tight deadlines and guerrilla development techniques that got so much achieved the first time.
+This project aims to [document](diary/index) the learning from the initial challenge, then continue the process to build out the finished product, using the same tight deadlines and guerrilla development techniques that got so much achieved the first time.
 
 I'll build new features in short, estimated sprints, and will diarise my thoughts, planning, and crucially *timings* for everything from research to specific programming tasks. When things go wrong, I'll record it, and at the end of the sprint I'll summarise the achievements and insights.
 
