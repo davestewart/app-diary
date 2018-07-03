@@ -18,14 +18,10 @@
           <Draggable v-for="(list, listIndex) in lists" :key="list.id">
             <section class="list-container" ref="list" :data-id="list.id">
 
-              <div class="list-header">
-                <span class="list-drag-handle">&#x2630;</span>
-                <ui-inline-edit class="list-title"
-                                :text="list.title"
-                                @submit="value => onEditList(list.id, value)"
-                                @cancel="value => focusInput(list.id)"
-                />
-              </div>
+              <list-header :title="list.title"
+                           @submit="value => onEditList(list.id, value)"
+                           @remove="removeList(list.id)"
+              />
 
               <Container
                 group-name="list"
@@ -36,7 +32,10 @@
                 @drop="e => onCardDrop(e, list, listIndex)"
               >
                 <Draggable v-for="item in list.items" :key="item.id">
-                  <Card :item="item" @edit="editItem"/>
+                  <Card :item="item"
+                        @edit="editItem"
+                        @remove="removeItem"
+                  />
                 </Draggable>
 
               </Container>
@@ -79,8 +78,8 @@
 import { Container, Draggable } from 'vue-smooth-dnd'
 
 import Card from './Card'
+import ListHeader from './ListHeader'
 import UiItemForm from '../ui/UiItemForm'
-import UiInlineEdit from '../ui/UiInlineEdit'
 import UiItemEdit from '../ui/UiItemEdit'
 import { makeDropHandler } from '../../../core/utils/plugins'
 import { makeData } from '../../state/demo'
@@ -89,10 +88,10 @@ export default {
   components: {
     Container,
     Draggable,
-    UiInlineEdit,
+    ListHeader,
+    Card,
     UiItemEdit,
     UiItemForm,
-    Card,
   },
 
   data: function () {
@@ -122,6 +121,10 @@ export default {
       this.focusInput(listId)
     },
 
+    removeList (listId) {
+      this.$store.commit('removeList', listId)
+    },
+
     onAddItem ({ id, text, more }) {
       if (more) {
         this.activeListId = id
@@ -145,6 +148,10 @@ export default {
 
     editItem (item) {
       this.showModal(item)
+    },
+
+    removeItem (item) {
+      this.$store.commit('removeItem', item.id)
     },
 
     onListDrop: makeDropHandler('onListDropComplete'),
@@ -225,23 +232,6 @@ export default {
       display: inline-block;
       vertical-align: top;
     }
-  }
-
-  .list-header {
-    display: flex;
-    margin-bottom: 5px;
-    margin-right: 5px;
-    font-size: 18px;
-  }
-
-  .list-drag-handle {
-    cursor: move;
-    padding: 2px 5px;
-  }
-
-  .list-title {
-    flex-grow: 1;
-    margin-left: -2px;
   }
 
   .card {

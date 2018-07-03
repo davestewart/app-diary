@@ -8,11 +8,11 @@
       <span v-else-if="timestamp" class="icon icon-date" :title="`Item is due on ${item.date}`">
         <i class="far fa-bell"></i>
       </span>
-      <span class="icon icon-edit" @click="edit">
-        <i class="fas fa-edit"></i>
+      <span class="icon icon-remove" @click="remove">
+        <i class="fas fa-times"></i>
       </span>
     </div>
-    <div>
+    <div class="text" @click="edit">
       <p class="item-title">{{ item.title }}</p>
       <p class="item-description" v-if="item.description">{{ item.description }}</p>
     </div>
@@ -54,6 +54,12 @@ export default {
   methods: {
     edit () {
       this.$emit('edit', this.item)
+    },
+
+    remove ($event) {
+      if ($event.ctrlKey || $event.metaKey || confirm('Are you sure you want to remove this item?')) {
+        this.$emit('remove', this.item)
+      }
     }
   }
 }
@@ -64,7 +70,7 @@ export default {
   .card {
     position: relative;
     border-radius: 3px;
-    cursor: default;
+    cursor: pointer;
   }
 
   .item-description {
@@ -75,7 +81,6 @@ export default {
     position: absolute;
     top: 10px;
     right: 10px;
-    cursor: pointer;
   }
 
   .is-overdue {
@@ -90,16 +95,20 @@ export default {
     }
   }
 
-  .icon-edit,
+  .icon-remove,
   .icon-date {
     color: #DDD;
   }
 
-  .icon-edit {
+  .icon-remove {
     display: none;
     margin-right: -5px;
     .card:hover & {
       display: block;
+    }
+
+    &:hover {
+      color: #AAA;
     }
   }
 </style>

@@ -41,6 +41,7 @@ export default {
   methods: {
     onEdit () {
       this.edit = true
+      this.$emit('edit', true)
       this.$nextTick(() => {
         this.$refs.input.focus()
         this.$refs.input.select()
@@ -51,6 +52,7 @@ export default {
       if (this.input) {
         this.$emit('submit', this.input)
         this.edit = false
+        this.$emit('edit', false)
       }
     },
 
@@ -59,6 +61,7 @@ export default {
       this.input = this.text
       this.$nextTick(() => {
         this.$emit('cancel')
+        this.$emit('edit', false)
       })
     },
 
